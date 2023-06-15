@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import reservationSystem.entity.Customer;
 import reservationSystem.service.CustomerService;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -22,7 +23,7 @@ public class CustomerController {
     }
 
     /**
-     * View Home page method
+     * View Home page
      * @param model
      * @param keyword filter keyword
      * @param pageNo pagination page number
@@ -41,6 +42,13 @@ public class CustomerController {
 
         Page<Customer> page = customerService.searchAndPaginateCustomers(keyword, pageNo, pageSize, sortField, sortDir);
         List<Customer> listCustomers = page.getContent();
+
+        // Format the date for each customer
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        for (Customer customer : listCustomers) {
+            String formattedDate = customer.getDate().format(dateFormatter);
+            customer.setFormattedDate(formattedDate);
+        }
 
         model.addAttribute("listCustomers", listCustomers);
         model.addAttribute("keyword", keyword);

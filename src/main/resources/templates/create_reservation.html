@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<! Create new reservation page -->
+<!-- Create new reservation page -->
 
 <head>
     <meta charset="UTF-8">
@@ -57,24 +57,26 @@
             <div class = "card-body">
                 <form th:action="@{/customers}" th:object = "${customer}" method="POST">
                     <div class = "form-group">
-                        <label> Customer Full Name</label>  <! Customer name -->
+                        <label> Customer Full Name</label>  <!-- Customer name -->
                         <input
                                 type = "text"
                                 name = "name"
                                 th:field = "*{name}"
                                 class = "form-control"
                                 placeholder="Enter Customer Full Name"
+                                required="true"
                         />
                     </div>
 
                     <div class = "form-group">
-                        <label> Reservation Date</label>  <!-- Date of reservation(update later) -->
+                        <label> Reservation Date</label>  <!-- Date of reservation -->
                         <input
                                 type = "datetime-local"
                                 name = "date"
                                 th:field = "*{date}"
                                 class = "form-control"
                                 placeholder="Enter Date of Reservation"
+                                required="true"
                         />
                         <small class="form-text text-muted"></small>
 
@@ -88,18 +90,20 @@
                                 th:field = "*{duration}"
                                 class = "form-control"
                                 placeholder="Enter Duration in Minutes"
+                                required="true"
                         />
-                        <small class="form-text text-muted">Format: "60 minutes".</small>
+                        <small class="form-text text-muted"></small>
                     </div>
 
                     <div class = "form-group">
-                        <label> Customer Email</label>  <!-- Customer email adress(phone number) -->
+                        <label> Customer Email</label>  <!-- Customer email -->
                         <input
                                 type = "text"
                                 name = "email"
                                 th:field = "*{email}"
                                 class = "form-control"
                                 placeholder="Enter Customer Email"
+                                required="true"
                         />
                     </div>
 

@@ -25,6 +25,8 @@ public class Customer {
     @Column(name = "email")
     private String email;
 
+    private String formattedDate;
+
 
     public Customer() {
     }
@@ -78,4 +80,11 @@ public class Customer {
         this.duration = duration;
     }
 
+    public String getFormattedDate() {
+        return formattedDate;
+    }
+
+    public void setFormattedDate(String formattedDate) {
+        this.formattedDate = formattedDate;
+    }
 }
