@@ -19,7 +19,10 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
      * @param pageable pagination
      * @return search result
      */
-    @Query("SELECT c FROM Customer c WHERE LOWER(c.name) LIKE LOWER(CONCAT('%', :keyword, '%')) OR LOWER(c.email) LIKE LOWER(CONCAT('%', :keyword, '%'))")
+    @Query("SELECT c FROM Customer c WHERE c.name LIKE %?1%"
+            + " OR c.email LIKE %?1%"
+            + " OR CONCAT(c.duration, '') LIKE %?1%"
+            + " OR CONCAT(c.date, '') LIKE %?1%")
     Page<Customer> findByKeyword(@Param("keyword") String keyword, Pageable pageable);
 
 }

@@ -19,25 +19,23 @@ public class Customer {
     @Column(name = "name", nullable = false)
     private String name;
     @Column(name = "date")
-    private String date;
+    private LocalDateTime date;
     @Column(name = "duration")
-    private String duration;
+    private int duration;
     @Column(name = "email")
     private String email;
 
-    @Column(name = "time")
-    private LocalDate datum;
 
     public Customer() {
     }
 
-    public Customer(String name, String date, String duration, String email, LocalDate datum) {
+    public Customer(String name, LocalDateTime date, int duration, String email) {
         super();
         this.name = name;
         this.date = date;
         this.duration = duration;
         this.email = email;
-        this.datum = datum;
+
     }
 
     public Long getId() {
@@ -64,29 +62,20 @@ public class Customer {
         this.email = email;
     }
 
-
-
-    public String getDuration() {
-        return duration;
-    }
-
-    public void setDuration(String duration) {
-        this.duration = duration;
-    }
-
-    public String getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
-    public LocalDate getDatum() {
-        return datum;
+    public int getDuration() {
+        return duration;
     }
 
-    public void setDatum(LocalDate datum) {
-        this.datum = datum;
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
+
 }
