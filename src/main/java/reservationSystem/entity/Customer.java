@@ -1,9 +1,12 @@
 package reservationSystem.entity;
 
+import com.fasterxml.jackson.databind.DatabindException;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
+
 // Customer/reservation object with all reservation information
 @Entity
 @Table(name = "customers")
@@ -22,15 +25,19 @@ public class Customer {
     @Column(name = "email")
     private String email;
 
+    @Column(name = "time")
+    private LocalDate datum;
+
     public Customer() {
     }
 
-    public Customer(String name, String date, String duration, String email) {
+    public Customer(String name, String date, String duration, String email, LocalDate datum) {
         super();
         this.name = name;
         this.date = date;
         this.duration = duration;
         this.email = email;
+        this.datum = datum;
     }
 
     public Long getId() {
@@ -73,5 +80,13 @@ public class Customer {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public LocalDate getDatum() {
+        return datum;
+    }
+
+    public void setDatum(LocalDate datum) {
+        this.datum = datum;
     }
 }

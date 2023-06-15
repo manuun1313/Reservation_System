@@ -107,6 +107,7 @@ public class CustomerController {
         existingCustomer.setDate(customer.getDate());
         existingCustomer.setDuration(customer.getDuration());
         existingCustomer.setEmail(customer.getEmail());
+        existingCustomer.setDatum(customer.getDatum());
 
         // save updated customer object
         customerService.updateCustomer(existingCustomer);

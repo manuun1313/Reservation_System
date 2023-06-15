@@ -97,6 +97,11 @@
                     Customer Email
                 </a>
             </th>
+            <th>
+                <a th:href="@{/customers(page=1, sortField='email', sortDir=${sortDir == 'asc' ? 'desc' : 'asc'})}">
+                    Datum
+                </a>
+            </th>
             <th>Actions</th>
         </tr>
         </thead>
@@ -106,6 +111,7 @@
             <td th:text="${customer.date}"></td>
             <td th:text="${customer.duration}"></td>
             <td th:text="${customer.email}"></td>
+            <td th:text="${customer.datum}"></td>
             <td> <!-- Delete/update content from the table buttons -->
                 <a th:href="@{/customers/edit/{id}(id=${customer.id})}" class="btn btn-primary">Update</a>
                 <a th:href="@{/customers/{id}(id=${customer.id})}" class="btn btn-danger">Delete</a>
