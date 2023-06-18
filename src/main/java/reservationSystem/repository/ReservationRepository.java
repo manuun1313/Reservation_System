@@ -6,12 +6,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import reservationSystem.entity.Customer;
-
-import java.util.List;
+import reservationSystem.entity.Reservation;
 
 @Repository
-public interface CustomerRepository extends JpaRepository<Customer, Long> {
+public interface ReservationRepository extends JpaRepository<Reservation, Long> {
 
     /**
      * Searching and pagination
@@ -19,10 +17,10 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
      * @param pageable pagination
      * @return search result
      */
-    @Query("SELECT c FROM Customer c WHERE c.name LIKE %?1%"
-            + " OR c.email LIKE %?1%"
-            + " OR CONCAT(c.duration, '') LIKE %?1%"
-            + " OR CONCAT(c.date, '') LIKE %?1%")
-    Page<Customer> findByKeyword(@Param("keyword") String keyword, Pageable pageable);
+    @Query("SELECT r FROM Reservation r WHERE r.name LIKE %?1%"
+            + " OR r.email LIKE %?1%"
+            + " OR CONCAT(r.duration, '') LIKE %?1%"
+            + " OR CONCAT(r.date, '') LIKE %?1%")
+    Page<Reservation> findByKeyword(@Param("keyword") String keyword, Pageable pageable);
 
 }

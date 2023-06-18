@@ -23,7 +23,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" th:href="@{/customers}">Home <span class="sr-only"></span></a>
+                <a class="nav-link" th:href="@{/reservations}">Home <span class="sr-only"></span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" th:href="@{/createReservationForm}">Create Reservation </a>
@@ -33,7 +33,7 @@
             </li>
         </ul>
         <!-- Filtering function -->
-        <form th:action="@{/customers}" class="form-inline my-2 my-lg-0">
+        <form th:action="@{/reservations}" class="form-inline my-2 my-lg-0">
             <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}"
                    placeholder="Filter Reservations" required/>
             &nbsp;
@@ -44,7 +44,7 @@
             </button>
             <!-- Filter window clear javascript function -->
             <script type="text/javascript">function clearSearch() {
-                window.location = "[[@{/customers}]]";
+                window.location = "[[@{/reservations}]]";
             }</script>
         </form>
     </div>
@@ -55,7 +55,7 @@
         <div class = "col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
             <h1 class = "text-center"> Update Reservation</h1>
             <div class = "card-body">
-                <form th:action="@{/customers/{id} (id=${customer.id})}" th:object = "${customer}" method="POST">
+                <form th:action="@{/reservations/{id} (id=${reservation.id})}" th:object = "${reservation}" method="POST">
                     <div class = "form-group">
                         <label> Customer Full Name</label>  <!-- Customer name -->
                         <input
@@ -109,7 +109,7 @@
                             Submit
                         </button>
 
-                        <a th:href = "@{/customers}" class = "btn btn-danger">
+                        <a th:href = "@{/reservations}" class = "btn btn-danger">
                             Cancel
                         </a>
                     </div>

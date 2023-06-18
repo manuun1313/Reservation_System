@@ -4,8 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import reservationSystem.entity.Customer;
-import reservationSystem.repository.CustomerRepository;
+import reservationSystem.repository.ReservationRepository;
 
 @SpringBootApplication
 public class ReservationSystemApplication implements CommandLineRunner {
@@ -15,7 +14,7 @@ public class ReservationSystemApplication implements CommandLineRunner {
 	}
 
 	@Autowired
-	private CustomerRepository customerRepository;
+	private ReservationRepository reservationRepository;
 	@Override
 	public void run(String... args) throws Exception {
 

@@ -38,7 +38,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" th:href="@{/customers}">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" th:href="@{/reservations}">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" th:href="@{/createReservationForm}">Create Reservation</a>
@@ -48,7 +48,7 @@
             </li>
         </ul>
         <!-- Filtering function -->
-        <form th:action="@{/customers}" class="form-inline my-2 my-lg-0">
+        <form th:action="@{/reservations}" class="form-inline my-2 my-lg-0">
             <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}"
                    placeholder="Filter Reservations" required/>
             &nbsp;
@@ -59,7 +59,7 @@
             </button>
             <!-- Filter window clear javascript function -->
             <script type="text/javascript">function clearSearch() {
-                window.location = "[[@{/customers}]]";
+                window.location = "[[@{/reservations}]]";
             }</script>
         </form>
     </div>
@@ -78,23 +78,23 @@
         <thead class="thead-light">
         <tr>
             <th>
-                <a th:href="@{/customers(page=1, sortField='name', sortDir=${sortDir == 'asc' ? 'desc' : 'asc'})}">
+                <a th:href="@{/reservations(page=1, sortField='name', sortDir=${sortDir == 'asc' ? 'desc' : 'asc'})}">
                     Customer Name
                 </a>
             </th>
 
             <th>
-                <a th:href="@{/customers(page=1, sortField='date', sortDir=${sortDir == 'asc' ? 'desc' : 'asc'})}">
+                <a th:href="@{/reservations(page=1, sortField='date', sortDir=${sortDir == 'asc' ? 'desc' : 'asc'})}">
                     Reservation Date
                 </a>
             </th>
             <th>
-                <a th:href="@{/customers(page=1, sortField='duration', sortDir=${sortDir == 'asc' ? 'desc' : 'asc'})}">
+                <a th:href="@{/reservations(page=1, sortField='duration', sortDir=${sortDir == 'asc' ? 'desc' : 'asc'})}">
                     Duration(minutes)
                 </a>
             </th>
             <th>
-                <a th:href="@{/customers(page=1, sortField='email', sortDir=${sortDir == 'asc' ? 'desc' : 'asc'})}">
+                <a th:href="@{/reservations(page=1, sortField='email', sortDir=${sortDir == 'asc' ? 'desc' : 'asc'})}">
                     Customer Email
                 </a>
             </th>
@@ -103,14 +103,14 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="customer : ${listCustomers}">
-            <td th:text="${customer.name}"></td>
-            <td th:text="${customer.formattedDate}"></td>
-            <td th:text="${customer.duration}"></td>
-            <td th:text="${customer.email}"></td>
+        <tr th:each="reservation : ${listReservations}">
+            <td th:text="${reservation.name}"></td>
+            <td th:text="${reservation.formattedDate}"></td>
+            <td th:text="${reservation.duration}"></td>
+            <td th:text="${reservation.email}"></td>
             <td> <!-- Delete/update content from the table buttons -->
-                <a th:href="@{/customers/edit/{id}(id=${customer.id})}" class="btn btn-primary">Update</a>
-                <a th:href="@{/customers/{id}(id=${customer.id})}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this reservation?')">Delete</a>
+                <a th:href="@{/reservations/edit/{id}(id=${reservation.id})}" class="btn btn-primary">Update</a>
+                <a th:href="@{/reservations/{id}(id=${reservation.id})}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this reservation?')">Delete</a>
             </td>
         </tr>
         </tbody>
@@ -118,19 +118,19 @@
     <!-- Pagination -->
     <ul class="pagination justify-content-center">
         <li th:class="${currentPage == 1} ? 'page-item disabled' : 'page-item'">
-            <a class="page-link" th:href="@{/customers(pageNo=1, pageSize=${pageSize}, sortField=${sortField}, sortDir=${sortDir})}">First</a>
+            <a class="page-link" th:href="@{/reservations(pageNo=1, pageSize=${pageSize}, sortField=${sortField}, sortDir=${sortDir})}">First</a>
         </li>
         <li th:class="${currentPage == 1} ? 'page-item disabled' : 'page-item'">
             <a class="page-link"
-               th:href="@{/customers(pageNo=${currentPage - 1}, pageSize=${pageSize}, sortField=${sortField}, sortDir=${sortDir})}">Previous</a>
+               th:href="@{/reservations(pageNo=${currentPage - 1}, pageSize=${pageSize}, sortField=${sortField}, sortDir=${sortDir})}">Previous</a>
         </li>
         <li th:class="${currentPage == totalPages} ? 'page-item disabled' : 'page-item'">
             <a class="page-link"
-               th:href="@{/customers(pageNo=${currentPage + 1}, pageSize=${pageSize}, sortField=${sortField}, sortDir=${sortDir})}">Next</a>
+               th:href="@{/reservations(pageNo=${currentPage + 1}, pageSize=${pageSize}, sortField=${sortField}, sortDir=${sortDir})}">Next</a>
         </li>
         <li th:class="${currentPage == totalPages} ? 'page-item disabled' : 'page-item'">
             <a class="page-link"
-               th:href="@{/customers(pageNo=${totalPages}, pageSize=${pageSize}, sortField=${sortField}, sortDir=${sortDir})}">Last</a>
+               th:href="@{/reservations(pageNo=${totalPages}, pageSize=${pageSize}, sortField=${sortField}, sortDir=${sortDir})}">Last</a>
         </li>
     </ul>
 </div>

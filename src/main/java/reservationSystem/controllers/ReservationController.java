@@ -1,25 +1,23 @@
 package reservationSystem.controllers;
 
-import org.springframework.boot.Banner;
 import org.springframework.data.domain.Page;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import reservationSystem.entity.Customer;
-import reservationSystem.service.CustomerService;
+import reservationSystem.entity.Reservation;
+import reservationSystem.service.ReservationService;
 
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
-public class CustomerController {
+public class ReservationController {
 
-    private CustomerService customerService;
+    private ReservationService reservationService;
 
-    public CustomerController(CustomerService customerService) {
+    public ReservationController(ReservationService reservationService) {
         super();
-        this.customerService = customerService;
+        this.reservationService = reservationService;
     }
 
     /**
@@ -32,7 +30,7 @@ public class CustomerController {
      * @param sortDir direction of sorting
      * @return customers html page with sorted and paginated content
      */
-    @GetMapping("/customers")
+    @GetMapping("/reservations")
     public String viewHomePage(Model model,
                                @RequestParam(value = "keyword", required = false) String keyword,
                                @RequestParam(value = "pageNo", required = false, defaultValue = "1") int pageNo,
@@ -40,17 +38,17 @@ public class CustomerController {
                                @RequestParam(value = "sortField", required = false, defaultValue = "date") String sortField,
                                @RequestParam(value = "sortDir", required = false, defaultValue = "asc") String sortDir) {
 
-        Page<Customer> page = customerService.searchAndPaginateCustomers(keyword, pageNo, pageSize, sortField, sortDir);
-        List<Customer> listCustomers = page.getContent();
+        Page<Reservation> page = reservationService.searchAndPaginateReservation(keyword, pageNo, pageSize, sortField, sortDir);
+        List<Reservation> listReservations = page.getContent();
 
         // Format the date for each customer
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-        for (Customer customer : listCustomers) {
-            String formattedDate = customer.getDate().format(dateFormatter);
-            customer.setFormattedDate(formattedDate);
+        for (Reservation reservation : listReservations) {
+            String formattedDate = reservation.getDate().format(dateFormatter);
+            reservation.setFormattedDate(formattedDate);
         }
 
-        model.addAttribute("listCustomers", listCustomers);
+        model.addAttribute("listReservations", listReservations);
         model.addAttribute("keyword", keyword);
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPages", page.getTotalPages());
@@ -59,7 +57,7 @@ public class CustomerController {
         model.addAttribute("sortDir", sortDir);
         model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
 
-        return "customers";
+        return "reservations";
     }
 
     /**
@@ -69,20 +67,20 @@ public class CustomerController {
      */
     @GetMapping("/createReservationForm")
     public String createReservationForm(Model model) {
-        Customer customer = new Customer();
-        model.addAttribute("customer",customer);
+        Reservation reservation = new Reservation();
+        model.addAttribute("reservation", reservation);
         return "create_reservation";
     }
 
     /**
      * save customer to database
-     * @param customer customer
+     * @param reservation customer
      * @return save customer to database and redirect to main page
      */
-    @PostMapping("/customers")
-    public String saveCustomer(@ModelAttribute("customer") Customer customer) {
-        customerService.saveCustomer(customer);
-        return "redirect:/customers";
+    @PostMapping("/reservations")
+    public String saveCustomer(@ModelAttribute("reservation") Reservation reservation) {
+        reservationService.saveReservation(reservation);
+        return "redirect:/reservations";
 
     }
 
@@ -92,34 +90,34 @@ public class CustomerController {
      * @param model
      * @return edit customer html page
      */
-    @GetMapping("/customers/edit/{id}")
-    public String editCustomerForm(@PathVariable Long id, Model model) {
-        model.addAttribute("customer",customerService.getCustomerById(id));
-        return "edit_customer";
+    @GetMapping("/reservations/edit/{id}")
+    public String editReservationForm(@PathVariable Long id, Model model) {
+        model.addAttribute("reservation", reservationService.getReservationById(id));
+        return "edit_reservation";
     }
 
     /**
      * Handler for update customer form request
      * @param id id of customer
-     * @param customer customer
+     * @param reservation customer
      * @param model
      * @return update customer to database and redirect to main page
      */
-    @PostMapping("/customers/{id}")
-    public String updateCustomer(@PathVariable Long id, @ModelAttribute("customer") Customer customer, Model model) {
+    @PostMapping("/reservations/{id}")
+    public String updateReservation(@PathVariable Long id, @ModelAttribute("reservation") Reservation reservation, Model model) {
         // getting customer from database by id
 
-        Customer existingCustomer = customerService.getCustomerById(id);
-        existingCustomer.setId(id);
-        existingCustomer.setName(customer.getName());
-        existingCustomer.setDate(customer.getDate());
-        existingCustomer.setDuration(customer.getDuration());
-        existingCustomer.setEmail(customer.getEmail());
+        Reservation existingReservation = reservationService.getReservationById(id);
+        existingReservation.setId(id);
+        existingReservation.setName(reservation.getName());
+        existingReservation.setDate(reservation.getDate());
+        existingReservation.setDuration(reservation.getDuration());
+        existingReservation.setEmail(reservation.getEmail());
 
 
         // save updated customer object
-        customerService.updateCustomer(existingCustomer);
-        return "redirect:/customers";
+        reservationService.updateReservation(existingReservation);
+        return "redirect:/reservations";
     }
 
     /**
@@ -127,9 +125,9 @@ public class CustomerController {
      * @param id delete customer from databse based on id
      * @return redirect to main html page
      */
-    @GetMapping("/customers/{id}")
-    public String deleteCustomer(@PathVariable Long id) {
-        customerService.deleteCustomerById(id);
-        return "redirect:/customers";
+    @GetMapping("/reservations/{id}")
+    public String deleteReservation(@PathVariable Long id) {
+        reservationService.deleteReservationById(id);
+        return "redirect:/reservations";
     }
 }

@@ -1,16 +1,13 @@
 package reservationSystem.entity;
 
-import com.fasterxml.jackson.databind.DatabindException;
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 // Customer/reservation object with all reservation information
 @Entity
-@Table(name = "customers")
-public class Customer {
+@Table(name = "reservations")
+public class Reservation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,10 +25,10 @@ public class Customer {
     private String formattedDate;
 
 
-    public Customer() {
+    public Reservation() {
     }
 
-    public Customer(String name, LocalDateTime date, int duration, String email) {
+    public Reservation(String name, LocalDateTime date, int duration, String email) {
         super();
         this.name = name;
         this.date = date;
