@@ -26,7 +26,7 @@ public class ReservationServiceImpl implements ReservationService {
      * @param pageSize number of items on a page
      * @param sortField sorting field
      * @param sortDir direction of sorting
-     * @return customers html page with sorted and paginated content
+     * @return reservations html page with sorted and paginated content
      */
     @Override
     public Page<Reservation> searchAndPaginateReservation(String keyword, int pageNo, int pageSize, String sortField, String sortDir) {

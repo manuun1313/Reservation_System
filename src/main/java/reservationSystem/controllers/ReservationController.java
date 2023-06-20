@@ -73,9 +73,9 @@ public class ReservationController {
     }
 
     /**
-     * save customer to database
-     * @param reservation customer
-     * @return save customer to database and redirect to main page
+     * save reservation to database
+     * @param reservation
+     * @return save reservation to database and redirect to main page
      */
     @PostMapping("/reservations")
     public String saveCustomer(@ModelAttribute("reservation") Reservation reservation) {
@@ -85,10 +85,10 @@ public class ReservationController {
     }
 
     /**
-     * edit customer info in database based on id
-     * @param id id of customer
+     * edit reservation info in database based on id
+     * @param id id of reservation
      * @param model
-     * @return edit customer html page
+     * @return edit reservation html page
      */
     @GetMapping("/reservations/edit/{id}")
     public String editReservationForm(@PathVariable Long id, Model model) {
@@ -97,11 +97,11 @@ public class ReservationController {
     }
 
     /**
-     * Handler for update customer form request
-     * @param id id of customer
-     * @param reservation customer
+     * Handler for update reservation form request
+     * @param id id of reservation
+     * @param reservation reservation
      * @param model
-     * @return update customer to database and redirect to main page
+     * @return update reservation to database and redirect to main page
      */
     @PostMapping("/reservations/{id}")
     public String updateReservation(@PathVariable Long id, @ModelAttribute("reservation") Reservation reservation, Model model) {
